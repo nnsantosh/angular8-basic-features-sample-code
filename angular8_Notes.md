@@ -1,432 +1,432 @@
---Angular CLI commands
---Command to create new angular project
-ng new <project name>
---Command to create new component
-ng generate component <component name>
-ng g c component
-ng g c -it -is
-The above command will generate inline template and style
---Command to create new module
-ng generate module <module name>
---Command to generate routing module
---Command to create service
-ng generate service <service name>
---To generate a class
-ng generate class <class name>
-
---As a good naming convention try to give component names with hyphen like user-list , user-detail etc.
-
-—-Creating new angular project using angular cli
- ng new hello-world
-
---High level flow of angular app:
-main.ts -> loads(bootstraps) the AppModule which is root module(app.module.ts) and will have all other modules plus components -> AppModule loads(bootstraps) the root component which is AppComponent (app.component.ts)-> The AppComponent will have the decorator(meta data) plus the typescript class plus the view html and css.
-The index.html will have the app-root selector html tag using which the app.component.html is rendered.
-All other component’s  html selector tag can be enclosed within the app.component.html and can be rendered.
-
--—Module is the first building block of an angular app.
-Angular apps are modular in nature.
-An angular application is just a collection of individual modules.
-Every module represents a  feature area in your application.
-For Example: We can have a users module that is related to application users and we can have admin module that is related to application admin.
-At the end of the day angular module is just lines of code that can be imported or exported.
-Every angular application has at least one module which is the Root module known as AppModule.
-Each module in turn is made of components and services.
-
-—-A component controls a portion of the view on the browser.
-For Example: We can have a component for navigation, one for side bar and one for the main content.
-Every angular application will have at least one component which is the Root component of the application known as AppComponent(app.component.ts).
-All the other components will be nested inside this Root component.
-Each component will have a html template to represent the view in the browser and class that controls the logic of that particular view.
---Creating a new component using angular cli
-ng g c <component name>
---If you need component with inline template and style
-ng g c <component name> -it -is
-
--—Module will also contain Services which is basically a class that contains the business logic of your application.
--—Modules interact and ultimately render the view in the browser.
-
-In the src folder there is main.ts which is the entry point for our application.
-Next is app folder
--—Component:
-Consists of three components:
-1. Template-HTML View
-2. Class in TypeScript that contains methods and properties.
-3. MetaData which is Decorator that contains information about the class.
-
--—Interpolation:
-{{name}}
-Simplest way to bind data from class to a template
-
-Attributes and Properties are not the same.
-Attributes are defined by html.
-Properties are defined by DOM.
-Attributes initialize DOM properties and then they are done.
-Attribute values cannot change once they are initialized.
-The attribute's main role is to initializes the DOM properties. So, once the DOM initialization is complete, the attributes job is done.
-Property values however can change.
-
-—-Property Binding:
-You can bind to the property of a DOM element.
-You can bind class attribute values to the Property of a DOM element.
-Ex: <input type=“text” [id]=“myId” value=“Santosh”>
-You can also use interpolation for above example:
-<input type=“text” id=“{{myId}}” value=“Santosh”>
-But interpolation works with only String. There are few DOM properties which are of type boolean.
-
-Instead of using [] for property binding you can use bind-
-Ex:
-<input type=“text” bind-id=“myId” value=“Santosh”>
-
-Similarly you can use the property binding for css class binding.
-Example:
-template: `
-    <h2>
-      Welcome {{name}}
-    </h2>
-    <h2 class="text-success">
-      CodeVolution
-    </h2>
-    <h2 [class]="successClass">
-      CodeVolution
-    </h2>
-    <h2 class="text-special" [class]="successClass">
-      CodeVolution
-    </h2>
-    <h2 [class.text-danger]="hasError">
-      CodeVolution
-    </h2>
-‘
-styles: [`
-  .text-success{
-    color:green;
-  }
-  .text-danger{
-    color:red;
-  }
-  .text-special{
-    font-style:italic;
-  }
-  `]
-
-export class TestComponent implements OnInit {
-
-  public name ="Santosh";
-  public siteUrl = window.location.href;
-  public myId="testId1";
-  public isDisabled=false;
-  public successClass="text-success";
-  public hasError=true;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  greetUser(){
-    return "Hello " + this.name;
-  }
-
-}
-
-—Similarly if we have to apply multiple classes conditionally Angular provides ngClass directive.
-
-—A Directive is a custom html attribute that angular provides.
-
-Example:
-template: `
-<h2 [ngClass]="messageClasses">
-      CodeVolution
-    </h2>
-
-`
-
-export class TestComponent implements OnInit {
-
-  public name ="Santosh";
-  public siteUrl = window.location.href;
-  public myId="testId1";
-  public isDisabled=false;
-  public successClass="text-success";
-  public hasError=true;
-  public isSpecial = true;
-  public messageClasses ={
-    "text-success":!this.hasError,
-    "text-danger":this.hasError,
-    "text-special":this.isSpecial
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  greetUser(){
-    return "Hello " + this.name;
-  }
-
-}
-
-So class binding is really useful bcos it allows to add or remove classes to html elements based on interactions or state of your application.
-
-—Style binding is used to apply inline styles to html elements.
-Example:
-template:`
-<h2 [style.color]="'orange'">
-    Style Binding
-    </h2>
-`
-
-—Conditional style Binding:
-template:`
- <h2 [style.color]="hasError ? 'red' : 'green' ">
-    Conditional Style Binding
-    </h2>
-`
-You can also assign component class properties during style binding.
-
-Example:
-
-template:`
-<h2 [style.color]="highlightColor">
-      Style Binding 2
-    </h2>
-`
-export class TestComponent implements OnInit {
-
-  public name ="Santosh";
-  public siteUrl = window.location.href;
-  public myId="testId1";
-  public isDisabled=false;
-  public successClass="text-success";
-  public hasError=true;
-  public isSpecial = true;
-  public messageClasses ={
-    "text-success":!this.hasError,
-    "text-danger":this.hasError,
-    "text-special":this.isSpecial
-  }
-  public highlightColor="orange";
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  greetUser(){
-    return "Hello " + this.name;
-  }
-
-}
-
-To apply multiple styles we can use ngStyle directive similar to ngClass Directive.
-
-Example:
-template:`
-<h2 [ngStyle]="titleStyles">
-      Directive Style Binding
-    </h2>
-`
-export class TestComponent implements OnInit {
-
-  public name ="Santosh";
-  public siteUrl = window.location.href;
-  public myId="testId1";
-  public isDisabled=false;
-  public successClass="text-success";
-  public hasError=true;
-  public isSpecial = true;
-  public messageClasses ={
-    "text-success":!this.hasError,
-    "text-danger":this.hasError,
-    "text-special":this.isSpecial
-  }
-  public highlightColor="orange";
-  public titleStyles={
-    color: "blue",
-    fontStyle: "italic"
-  }
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  greetUser(){
-    return "Hello " + this.name;
-  }
-
-}
-
--—Data Binding is from class to the template(html view).
- But sometimes we need the other way around like from html view to class. This is required in response to events on the html. This is known as Event Binding.
-
-Example:
-template:`
- <button (click)="onClick()">Greet</button>
-    {{greeting}}
-`
-
-export class TestComponent implements OnInit {
-
-  public greeting= "";
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  onClick(){
-    console.log("Welcome to Codevolution!!");
-    this.greeting = "Welcome to Codevolution!!";
-  }
-
-}
-You can also capture the information about the event itself
-
-Example:
-template:`
- <button (click)="onClick($event)”>Greet</button>
-    {{greeting}}
-`
-
-export class TestComponent implements OnInit {
-  public greeting= "";
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  greetUser(){
-    return "Hello " + this.name;
-  }
-
-  onClick(event){
-    console.log("Welcome to Codevolution!!");
-    this.greeting = event.type;
-  }
-
-}
-
---Instead of assigning event handler to an event you can directly assign template statement.
- <button (click)="greeting='Welcome Santosh!'">Greet</button>
-
---Template reference variables:
-Reference variable can be used to refer to a html element and all of its DOM properties.
-The way to create reference variable is to use: #myInputText
-
-Example:
-template: `
-<input #myInputText type="text">
-    <button (click)="logMessage(myInputText.value)">Log Message</button>
-    {{loggedMessage}}
-`
-
-export class TestComponent implements OnInit {
-  public loggedMessage="";
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  logMessage(message){
-    console.log(message);
-    this.loggedMessage=message;
-  }
-
-}
-
--—Two way property binding using ngModel directive
-Sometimes we want our model and view to be in sync.
-Example: For username and password fields
-We have property binding to bind class attribute values to view
-We have event binding to bind html element values to class attribute values
-Combining both these concepts is the usage of ngModel Directive
-You will need to import Forms Module in your root module(app.module.ts)
-
-In your component:
-
-template: `
- <input [(ngModel)]="username" type="text">
-    {{username}}
-`
-
-export class TestComponent implements OnInit {
-   public username = "";
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
-
--—Structural Directives
-These are directives that let you add or remove HTML elements from the DOM.
-ngIf, ngSwitch and ngFor
-
-
-ngIf Example:
-template: `
-  <h2 *ngIf=“true">
-    Codevolution
-  </h2>
-  `,
-
-If the above condition is changed to false the h2 element itself is removed from the DOM.
-
-ngSwitch Example:
-template: `
- <div [ngSwitch]="color">
-    <div [style.color]="'red'" *ngSwitchCase="'red'">You picked red color</div>
-    <div [style.color]="'blue'" *ngSwitchCase="'blue'">You picked blue color</div>
-    <div [style.color]="'green'" *ngSwitchCase="'green'">You picked green color</div>
-    <div *ngSwitchDefault>Pick color again</div>
-  </div>
-  `,
-
-export class TestComponent implements OnInit {
-  public color="green";
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
-
-ngIf and ngSwitch conditionally render html elements.
-
-ngFor Directive renders list of HTML elements.
-
-Example:
-template: `
- <div *ngFor="let colour of colours;index as i;">
-    <h2>{{i}} {{colour}}</h2>
-  </div>
-
-
-`
- export class TestComponent implements OnInit {
-
-  public colours = ["red","blue","green","yellow"];
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+--Angular CLI commands <br/>
+--Command to create new angular project <br/>
+ng new <project name> <br/>
+--Command to create new component <br/>
+ng generate component <component name> <br/>
+ng g c component <br/>
+ng g c -it -is <br/>
+The above command will generate inline template and style <br/>
+--Command to create new module <br/>
+ng generate module <module name> <br/>
+--Command to generate routing module <br/>
+--Command to create service <br/>
+ng generate service <service name> <br/>
+--To generate a class <br/>
+ng generate class <class name> <br/>
+
+--As a good naming convention try to give component names with hyphen like user-list , user-detail etc. <br/>
+
+—-Creating new angular project using angular cli <br/>
+ ng new hello-world <br/>
+
+--High level flow of angular app: <br/>
+main.ts -> loads(bootstraps) the AppModule which is root module(app.module.ts) and will have all other modules plus components -> AppModule loads(bootstraps) the root component which is AppComponent (app.component.ts)-> The AppComponent will have the decorator(meta data) plus the typescript class plus the view html and css. <br/>
+The index.html will have the app-root selector html tag using which the app.component.html is rendered. <br/> 
+All other component’s  html selector tag can be enclosed within the app.component.html and can be rendered. <br/>
+
+-—Module is the first building block of an angular app. <br/>
+Angular apps are modular in nature. <br/>
+An angular application is just a collection of individual modules. <br/>
+Every module represents a  feature area in your application. <br/>
+For Example: We can have a users module that is related to application users and we can have admin module that is related to application admin. <br/>
+At the end of the day angular module is just lines of code that can be imported or exported. <br/>
+Every angular application has at least one module which is the Root module known as AppModule. <br/>
+Each module in turn is made of components and services. <br/>
+
+—-A component controls a portion of the view on the browser. <br/>
+For Example: We can have a component for navigation, one for side bar and one for the main content. <br/>
+Every angular application will have at least one component which is the Root component of the application known as AppComponent(app.component.ts). <br/>
+All the other components will be nested inside this Root component. <br/>
+Each component will have a html template to represent the view in the browser and class that controls the logic of that particular view. <br/>
+--Creating a new component using angular cli <br/>
+ng g c <component name> <br/>
+--If you need component with inline template and style <br/>
+ng g c <component name> -it -is <br/>
+
+-—Module will also contain Services which is basically a class that contains the business logic of your application. <br/>
+-—Modules interact and ultimately render the view in the browser. <br/>
+
+In the src folder there is main.ts which is the entry point for our application. <br/>
+Next is app folder <br/>
+-—Component: <br/>
+Consists of three components: <br/>
+1. Template-HTML View <br/>
+2. Class in TypeScript that contains methods and properties. <br/>
+3. MetaData which is Decorator that contains information about the class. <br/>
+
+-—Interpolation: <br/>
+{{name}} <br/>
+Simplest way to bind data from class to a template <br/>
+
+Attributes and Properties are not the same. <br/>
+Attributes are defined by html. <br/>
+Properties are defined by DOM. <br/>
+Attributes initialize DOM properties and then they are done. <br/>
+Attribute values cannot change once they are initialized. <br/>
+The attribute's main role is to initializes the DOM properties. So, once the DOM initialization is complete, the attributes job is done. <br/>
+Property values however can change. <br/>
+
+—-Property Binding: <br/>
+You can bind to the property of a DOM element. <br/>
+You can bind class attribute values to the Property of a DOM element. <br/>
+Ex: <input type=“text” [id]=“myId” value=“Santosh”> <br/>
+You can also use interpolation for above example: <br/>
+<input type=“text” id=“{{myId}}” value=“Santosh”> <br/>
+But interpolation works with only String. There are few DOM properties which are of type boolean. <br/>
+
+Instead of using [] for property binding you can use bind- <br/>
+Ex: <br/>
+<input type=“text” bind-id=“myId” value=“Santosh”> <br/>
+
+Similarly you can use the property binding for css class binding. <br/>
+Example: <br/>
+template: ` <br/>
+    <h2> <br/>
+      Welcome {{name}} <br/>
+    </h2> <br/>
+    <h2 class="text-success"> <br/>
+      CodeVolution <br/>
+    </h2> <br/>
+    <h2 [class]="successClass"> <br/>
+      CodeVolution <br/>
+    </h2> <br/>
+    <h2 class="text-special" [class]="successClass"> <br/>
+      CodeVolution <br/>
+    </h2> <br/>
+    <h2 [class.text-danger]="hasError"> <br/>
+      CodeVolution <br/> 
+    </h2> <br/>
+‘ <br/>
+styles: [` <br/>
+  .text-success{ <br/>
+    color:green; <br/>
+  } <br/>
+  .text-danger{ <br/>
+    color:red; <br/>
+  } <br/>
+  .text-special{ <br/>
+    font-style:italic; <br/>
+  } <br/>
+  `] <br/>
+
+export class TestComponent implements OnInit { <br/>
+
+  public name ="Santosh"; <br/>
+  public siteUrl = window.location.href; <br/>
+  public myId="testId1"; <br/>
+  public isDisabled=false; <br/>
+  public successClass="text-success"; <br/>
+  public hasError=true; <br/>
+
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  greetUser(){ <br/>
+    return "Hello " + this.name; <br/>
+  } <br/>
+
+}<br/>
+
+—Similarly if we have to apply multiple classes conditionally Angular provides ngClass directive. <br/>
+
+—A Directive is a custom html attribute that angular provides. <br/>
+
+Example: <br/>
+template: ` <br/>
+<h2 [ngClass]="messageClasses"> <br/>
+      CodeVolution <br/>
+    </h2> <br/>
+
+` <br/>
+
+export class TestComponent implements OnInit { <br/>
+
+  public name ="Santosh"; <br/>
+  public siteUrl = window.location.href; <br/>
+  public myId="testId1"; <br/>
+  public isDisabled=false; <br/>
+  public successClass="text-success"; <br/>
+  public hasError=true; <br/>
+  public isSpecial = true; <br/>
+  public messageClasses ={ <br/>
+    "text-success":!this.hasError, <br/>
+    "text-danger":this.hasError, <br/>
+    "text-special":this.isSpecial <br/>
+  } <br/>
+
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  greetUser(){ <br/>
+    return "Hello " + this.name; <br/>
+  } <br/>
+
+} <br/>
+
+So class binding is really useful bcos it allows to add or remove classes to html elements based on interactions or state of your application. <br/>
+
+—Style binding is used to apply inline styles to html elements. <br/>
+Example: <br/>
+template:` <br/>
+<h2 [style.color]="'orange'"> <br/>
+    Style Binding <br/>
+    </h2> <br/>
+` <br/>
+
+—Conditional style Binding: <br/>
+template:` <br/>
+ <h2 [style.color]="hasError ? 'red' : 'green' "> <br/>
+    Conditional Style Binding <br/>
+    </h2> <br/>
+` <br/>
+You can also assign component class properties during style binding. <br/>
+
+Example: <br/>
+
+template:` <br/>
+<h2 [style.color]="highlightColor"> <br/>
+      Style Binding 2 <br/>
+    </h2> <br/>
+` <br/>
+export class TestComponent implements OnInit { <br/>
+
+  public name ="Santosh"; <br/>
+  public siteUrl = window.location.href; <br/>
+  public myId="testId1"; <br/>
+  public isDisabled=false; <br/>
+  public successClass="text-success"; <br/>
+  public hasError=true; <br/>
+  public isSpecial = true; <br/>
+  public messageClasses ={ <br/>
+    "text-success":!this.hasError, <br/>
+    "text-danger":this.hasError, <br/>
+    "text-special":this.isSpecial <br/>
+  } <br/>
+  public highlightColor="orange"; <br/>
+
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  greetUser(){ <br/>
+    return "Hello " + this.name; <br/>
+  } <br/>
+
+} <br/>
+
+To apply multiple styles we can use ngStyle directive similar to ngClass Directive. <br/>
+
+Example: <br/>
+template:` <br/>
+<h2 [ngStyle]="titleStyles"> <br/>
+      Directive Style Binding <br/>
+    </h2> <br/>
+` <br/>
+export class TestComponent implements OnInit { <br/>
+
+  public name ="Santosh"; <br/>
+  public siteUrl = window.location.href; <br/>
+  public myId="testId1"; <br/>
+  public isDisabled=false; <br/>
+  public successClass="text-success"; <br/>
+  public hasError=true; <br/>
+  public isSpecial = true; <br/>
+  public messageClasses ={ <br/> 
+    "text-success":!this.hasError, <br/>
+    "text-danger":this.hasError, <br/>
+    "text-special":this.isSpecial <br/>
+  } <br/>
+  public highlightColor="orange"; <br/>
+  public titleStyles={ <br/>
+    color: "blue", <br/>
+    fontStyle: "italic" <br/>
+  } <br/>
+
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  greetUser(){ <br/>
+    return "Hello " + this.name; <br/>
+  } <br/>
+
+} <br/>
+
+-—Data Binding is from class to the template(html view). <br/>
+ But sometimes we need the other way around like from html view to class. This is required in response to events on the html. This is known as Event Binding. <br/>
+ 
+Example: <br/>
+template:` <br/>
+ <button (click)="onClick()">Greet</button> <br/>
+    {{greeting}} <br/>
+` <br/>
+
+export class TestComponent implements OnInit { <br/>
+
+  public greeting= ""; <br/>
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  onClick(){ <br/>
+    console.log("Welcome to Codevolution!!"); <br/>
+    this.greeting = "Welcome to Codevolution!!"; <br/>
+  } <br/>
+
+} <br/>
+You can also capture the information about the event itself <br/>
+
+Example: <br/>
+template:` <br/>
+ <button (click)="onClick($event)”>Greet</button> <br/>
+    {{greeting}} <br/>
+` <br/>
+
+export class TestComponent implements OnInit { <br/>
+  public greeting= ""; <br/>
+  constructor() { }  <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  greetUser(){ <br/>
+    return "Hello " + this.name; <br/>
+  } <br/>
+
+  onClick(event){ <br/>
+    console.log("Welcome to Codevolution!!"); <br/>
+    this.greeting = event.type; <br/>
+  } <br/>
+
+} <br/>
+
+--Instead of assigning event handler to an event you can directly assign template statement. <br/>
+ <button (click)="greeting='Welcome Santosh!'">Greet</button> <br/>
+
+--Template reference variables: <br/>
+Reference variable can be used to refer to a html element and all of its DOM properties. <br/>
+The way to create reference variable is to use: #myInputText <br/>
+
+Example: <br/>
+template: `  <br/>
+<input #myInputText type="text"> <br/>
+    <button (click)="logMessage(myInputText.value)">Log Message</button> <br/>
+    {{loggedMessage}} <br/>
+` <br/>
+
+export class TestComponent implements OnInit { <br/>
+  public loggedMessage=""; <br/>
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+  logMessage(message){ <br/>
+    console.log(message); <br/>
+    this.loggedMessage=message; <br/>
+  } <br/>
+
+} <br/>
+
+-—Two way property binding using ngModel directive <br/>
+Sometimes we want our model and view to be in sync. <br/>
+Example: For username and password fields <br/>
+We have property binding to bind class attribute values to view <br/>
+We have event binding to bind html element values to class attribute values <br/>
+Combining both these concepts is the usage of ngModel Directive <br/>
+You will need to import Forms Module in your root module(app.module.ts) <br/>
+
+In your component: <br/>
+
+template: ` <br/>
+ <input [(ngModel)]="username" type="text"> <br/>
+    {{username}} <br/>
+ ` <br/>
+
+export class TestComponent implements OnInit { <br/>
+   public username = ""; <br/>
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+} <br/>
+
+-—Structural Directives <br/>
+These are directives that let you add or remove HTML elements from the DOM. <br/>
+ngIf, ngSwitch and ngFor <br/>
+
+
+ngIf Example: <br/>
+template: ` <br/>
+  <h2 *ngIf=“true"> <br/>
+    Codevolution <br/>
+  </h2> <br/>
+  `,<br/>
+
+If the above condition is changed to false the h2 element itself is removed from the DOM. <br/>
+
+ngSwitch Example: <br/>
+template: ` <br/>
+ <div [ngSwitch]="color"> <br/>
+    <div [style.color]="'red'" *ngSwitchCase="'red'">You picked red color</div> <br/>
+    <div [style.color]="'blue'" *ngSwitchCase="'blue'">You picked blue color</div> <br/>
+    <div [style.color]="'green'" *ngSwitchCase="'green'">You picked green color</div> <br/>
+    <div *ngSwitchDefault>Pick color again</div> <br/>
+  </div> <br/>
+  `, <br/>
+
+export class TestComponent implements OnInit { <br/>
+  public color="green"; <br/>
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+} <br/>
+
+ngIf and ngSwitch conditionally render html elements. <br/>
+ 
+ngFor Directive renders list of HTML elements. <br/>
+
+Example: <br/>
+template: ` <br/>
+ <div *ngFor="let colour of colours;index as i;"> <br/>
+    <h2>{{i}} {{colour}}</h2> <br/>
+  </div> <br/>
+
+
+` <br/>
+ export class TestComponent implements OnInit { <br/>
+
+  public colours = ["red","blue","green","yellow"]; <br/>
+  constructor() { } <br/>
+
+  ngOnInit(): void { <br/>
+  } <br/>
+
+} <br/>
  
-—Component interaction
-Generally in angular application components are independent. So there will be one root component or parent component and multiple child components.
-Sometimes there is need for components to share data between each other. This is done using @Input and @Output decorators.
-Using the @Input decorator the child component can accept the input from the Parent component.
-Using the @Output decorator the child component can send data to the Parent component.
+—Component interaction <br/>
+Generally in angular application components are independent. So there will be one root component or parent component and multiple child components. <br/>
+Sometimes there is need for components to share data between each other. This is done using @Input and @Output decorators. <br/>
+Using the @Input decorator the child component can accept the input from the Parent component. <br/>
+Using the @Output decorator the child component can send data to the Parent component. <br/>
 
-Let us take below example where we have two components:
-1. Parent component - app.component.ts and app.component.html
-2. Child component - test.component.ts and test.component.html
+Let us take below example where we have two components: <br/>
+1. Parent component - app.component.ts and app.component.html <br/>
+2. Child component - test.component.ts and test.component.html <br/>
 
-From the Parent component we send name to child component
+From the Parent component we send name to child component <br/>
 
-So in app.component.ts
+So in app.component.ts <br/>
 
 import {Component} from '@angular/core';
 
