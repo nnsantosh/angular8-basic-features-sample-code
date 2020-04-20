@@ -80,34 +80,34 @@ Ex: <br/>
 
 Similarly you can use the property binding for css class binding. <br/>
 Example: <br/>
-template: ` <br/>
-    <h2> <br/>
-      Welcome {{name}} <br/>
-    </h2> <br/>
-    <h2 class="text-success"> <br/>
-      CodeVolution <br/>
-    </h2> <br/>
-    <h2 [class]="successClass"> <br/>
-      CodeVolution <br/>
-    </h2> <br/>
-    <h2 class="text-special" [class]="successClass"> <br/>
-      CodeVolution <br/>
-    </h2> <br/>
-    <h2 [class.text-danger]="hasError"> <br/>
-      CodeVolution <br/> 
-    </h2> <br/>
-‘ <br/>
-styles: [` <br/>
-  .text-success{ <br/>
-    color:green; <br/>
-  } <br/>
-  .text-danger{ <br/>
-    color:red; <br/>
-  } <br/>
-  .text-special{ <br/>
-    font-style:italic; <br/>
-  } <br/>
-  `] <br/>
+template: `
+    <h2>
+      Welcome {{name}}
+    </h2>
+    <h2 class="text-success"> 
+      CodeVolution
+    </h2>
+    <h2 [class]="successClass">
+      CodeVolution
+    </h2>
+    <h2 class="text-special" [class]="successClass">
+      CodeVolution
+    </h2> 
+    <h2 [class.text-danger]="hasError"> 
+      CodeVolution
+    </h2>
+‘ 
+styles: [` 
+  .text-success{ 
+    color:green; 
+  } 
+  .text-danger{ 
+    color:red; 
+  } 
+  .text-special{ 
+    font-style:italic; 
+  } 
+  `] 
 
 export class TestComponent implements OnInit { <br/>
 
@@ -134,13 +134,13 @@ export class TestComponent implements OnInit { <br/>
 —A Directive is a custom html attribute that angular provides. <br/>
 
 Example: <br/>
-template: ` <br/>
-<h2 [ngClass]="messageClasses"> <br/>
-      CodeVolution <br/>
-    </h2> <br/>
+template: `
+<h2 [ngClass]="messageClasses">
+      CodeVolution
+    </h2>
 
-` <br/>
-
+` 
+<br/>
 export class TestComponent implements OnInit { <br/>
 
   public name ="Santosh"; <br/>
@@ -150,10 +150,10 @@ export class TestComponent implements OnInit { <br/>
   public successClass="text-success"; <br/>
   public hasError=true; <br/>
   public isSpecial = true; <br/>
-  public messageClasses ={ <br/>
-    "text-success":!this.hasError, <br/>
-    "text-danger":this.hasError, <br/>
-    "text-special":this.isSpecial <br/>
+  public messageClasses ={
+    "text-success":!this.hasError, 
+    "text-danger":this.hasError, 
+    "text-special":this.isSpecial 
   } <br/>
 
   constructor() { } <br/>
@@ -161,37 +161,39 @@ export class TestComponent implements OnInit { <br/>
   ngOnInit(): void { <br/>
   } <br/>
 
-  greetUser(){ <br/>
+  greetUser(){ 
     return "Hello " + this.name; <br/>
-  } <br/>
-
-} <br/>
+  } 
+ <br/>
+} 
+<br/>
 
 So class binding is really useful bcos it allows to add or remove classes to html elements based on interactions or state of your application. <br/>
 
 —Style binding is used to apply inline styles to html elements. <br/>
 Example: <br/>
-template:` <br/>
-<h2 [style.color]="'orange'"> <br/>
-    Style Binding <br/>
-    </h2> <br/>
-` <br/>
+template:`
+<h2 [style.color]="'orange'">
+    Style Binding
+    </h2>
+`
 
 —Conditional style Binding: <br/>
-template:` <br/>
- <h2 [style.color]="hasError ? 'red' : 'green' "> <br/>
-    Conditional Style Binding <br/>
-    </h2> <br/>
-` <br/>
+template:`
+ <h2 [style.color]="hasError ? 'red' : 'green' ">
+    Conditional Style Binding
+    </h2>
+`
+<br/>
 You can also assign component class properties during style binding. <br/>
 
 Example: <br/>
 
-template:` <br/>
-<h2 [style.color]="highlightColor"> <br/>
-      Style Binding 2 <br/>
-    </h2> <br/>
-` <br/>
+template:`
+<h2 [style.color]="highlightColor">
+      Style Binding 2
+    </h2>
+`
 export class TestComponent implements OnInit { <br/>
 
   public name ="Santosh"; <br/>
@@ -201,32 +203,37 @@ export class TestComponent implements OnInit { <br/>
   public successClass="text-success"; <br/>
   public hasError=true; <br/>
   public isSpecial = true; <br/>
-  public messageClasses ={ <br/>
+  public messageClasses ={
     "text-success":!this.hasError, <br/>
     "text-danger":this.hasError, <br/>
     "text-special":this.isSpecial <br/>
-  } <br/>
+  }
+  <br/>
   public highlightColor="orange"; <br/>
 
-  constructor() { } <br/>
+  constructor() { } 
+  <br/>
 
-  ngOnInit(): void { <br/>
-  } <br/>
+  ngOnInit(): void {
+  } 
+  <br/>
 
-  greetUser(){ <br/>
-    return "Hello " + this.name; <br/>
-  } <br/>
+  greetUser(){
+    return "Hello " + this.name; 
+  } 
+  <br/>
 
 } <br/>
 
 To apply multiple styles we can use ngStyle directive similar to ngClass Directive. <br/>
 
 Example: <br/>
-template:` <br/>
-<h2 [ngStyle]="titleStyles"> <br/>
-      Directive Style Binding <br/>
-    </h2> <br/>
-` <br/>
+template:` 
+<h2 [ngStyle]="titleStyles">
+      Directive Style Binding
+    </h2>
+`
+<br/>
 export class TestComponent implements OnInit { <br/>
 
   public name ="Santosh"; <br/>
@@ -236,76 +243,90 @@ export class TestComponent implements OnInit { <br/>
   public successClass="text-success"; <br/>
   public hasError=true; <br/>
   public isSpecial = true; <br/>
-  public messageClasses ={ <br/> 
-    "text-success":!this.hasError, <br/>
-    "text-danger":this.hasError, <br/>
-    "text-special":this.isSpecial <br/>
-  } <br/>
-  public highlightColor="orange"; <br/>
-  public titleStyles={ <br/>
-    color: "blue", <br/>
-    fontStyle: "italic" <br/>
-  } <br/>
+  public messageClasses ={
+    "text-success":!this.hasError,
+    "text-danger":this.hasError,
+    "text-special":this.isSpecial
+  } 
+  <br/>
+  public highlightColor="orange"; 
+  <br/>
+  public titleStyles={
+    color: "blue",
+    fontStyle: "italic"
+  } 
+  <br/>
 
   constructor() { } <br/>
 
-  ngOnInit(): void { <br/>
-  } <br/>
+  ngOnInit(): void {
+  } 
+  <br/>
 
-  greetUser(){ <br/>
-    return "Hello " + this.name; <br/>
-  } <br/>
+  greetUser(){
+    return "Hello " + this.name;
+  } 
+  <br/>
 
-} <br/>
+} 
+<br/>
 
 -—Data Binding is from class to the template(html view). <br/>
  But sometimes we need the other way around like from html view to class. This is required in response to events on the html. This is known as Event Binding. <br/>
  
 Example: <br/>
-template:` <br/>
- <button (click)="onClick()">Greet</button> <br/>
-    {{greeting}} <br/>
-` <br/>
+template:`
+ <button (click)="onClick()">Greet</button>
+    {{greeting}}
+` 
+<br/>
 
 export class TestComponent implements OnInit { <br/>
 
   public greeting= ""; <br/>
   constructor() { } <br/>
 
-  ngOnInit(): void { <br/>
-  } <br/>
+  ngOnInit(): void {
+  } 
+  <br/>
 
-  onClick(){ <br/>
-    console.log("Welcome to Codevolution!!"); <br/>
-    this.greeting = "Welcome to Codevolution!!"; <br/>
-  } <br/>
+  onClick(){ 
+    console.log("Welcome to Codevolution!!");
+    this.greeting = "Welcome to Codevolution!!";
+  }
 
-} <br/>
+} 
+<br/>
 You can also capture the information about the event itself <br/>
 
 Example: <br/>
-template:` <br/>
- <button (click)="onClick($event)”>Greet</button> <br/>
-    {{greeting}} <br/>
-` <br/>
+template:` 
+ <button (click)="onClick($event)”>Greet</button>
+    {{greeting}}
+` 
+<br/>
 
 export class TestComponent implements OnInit { <br/>
   public greeting= ""; <br/>
   constructor() { }  <br/>
 
-  ngOnInit(): void { <br/>
-  } <br/>
+  ngOnInit(): void {
+  } 
+  <br/>
 
-  greetUser(){ <br/>
-    return "Hello " + this.name; <br/>
-  } <br/>
+  greetUser(){
+    return "Hello " + this.name;
+  } 
+  <br/>
 
-  onClick(event){ <br/>
-    console.log("Welcome to Codevolution!!"); <br/>
-    this.greeting = event.type; <br/>
-  } <br/>
+  onClick(event){
+    console.log("Welcome to Codevolution!!");
+    this.greeting = event.type;
+  } 
+  <br/>
 
-} <br/>
+} 
+<br/>
 
 --Instead of assigning event handler to an event you can directly assign template statement. <br/>
  <button (click)="greeting='Welcome Santosh!'">Greet</button> <br/>
@@ -315,25 +336,29 @@ Reference variable can be used to refer to a html element and all of its DOM pro
 The way to create reference variable is to use: #myInputText <br/>
 
 Example: <br/>
-template: `  <br/>
-<input #myInputText type="text"> <br/>
-    <button (click)="logMessage(myInputText.value)">Log Message</button> <br/>
-    {{loggedMessage}} <br/>
-` <br/>
+template: `
+<input #myInputText type="text">
+    <button (click)="logMessage(myInputText.value)">Log Message</button>
+    {{loggedMessage}}
+` 
+<br/>
 
-export class TestComponent implements OnInit { <br/>
-  public loggedMessage=""; <br/>
-  constructor() { } <br/>
+export class TestComponent implements OnInit {
+  public loggedMessage="";
+  constructor() { } 
 
-  ngOnInit(): void { <br/>
-  } <br/>
+  ngOnInit(): void {
+  } 
+  <br/>
 
-  logMessage(message){ <br/>
-    console.log(message); <br/>
-    this.loggedMessage=message; <br/>
-  } <br/>
+  logMessage(message){
+    console.log(message);
+    this.loggedMessage=message;
+  } 
+  <br/>
 
-} <br/>
+} 
+<br/>
 
 -—Two way property binding using ngModel directive <br/>
 Sometimes we want our model and view to be in sync. <br/>
@@ -345,19 +370,19 @@ You will need to import Forms Module in your root module(app.module.ts) <br/>
 
 In your component: <br/>
 
-template: ` <br/>
- <input [(ngModel)]="username" type="text"> <br/>
-    {{username}} <br/>
- ` <br/>
+template: `
+ <input [(ngModel)]="username" type="text">
+    {{username}}
+ `
 
-export class TestComponent implements OnInit { <br/>
-   public username = ""; <br/>
-  constructor() { } <br/>
+export class TestComponent implements OnInit {
+   public username = ""; 
+  constructor() { }
+ <br/>
+  ngOnInit(): void {
+  }
 
-  ngOnInit(): void { <br/>
-  } <br/>
-
-} <br/>
+}
 
 -—Structural Directives <br/>
 These are directives that let you add or remove HTML elements from the DOM. <br/>
@@ -365,23 +390,25 @@ ngIf, ngSwitch and ngFor <br/>
 
 
 ngIf Example: <br/>
-template: ` <br/>
-  <h2 *ngIf=“true"> <br/>
-    Codevolution <br/>
-  </h2> <br/>
-  `,<br/>
+template: `
+  <h2 *ngIf=“true">
+    Codevolution
+  </h2>
+  `,
+  <br/>
 
 If the above condition is changed to false the h2 element itself is removed from the DOM. <br/>
 
 ngSwitch Example: <br/>
-template: ` <br/>
- <div [ngSwitch]="color"> <br/>
-    <div [style.color]="'red'" *ngSwitchCase="'red'">You picked red color</div> <br/>
-    <div [style.color]="'blue'" *ngSwitchCase="'blue'">You picked blue color</div> <br/>
-    <div [style.color]="'green'" *ngSwitchCase="'green'">You picked green color</div> <br/>
-    <div *ngSwitchDefault>Pick color again</div> <br/>
-  </div> <br/>
-  `, <br/>
+template: `
+ <div [ngSwitch]="color">
+    <div [style.color]="'red'" *ngSwitchCase="'red'">You picked red color</div>
+    <div [style.color]="'blue'" *ngSwitchCase="'blue'">You picked blue color</div>
+    <div [style.color]="'green'" *ngSwitchCase="'green'">You picked green color</div>
+    <div *ngSwitchDefault>Pick color again</div>
+  </div>
+  `, 
+  <br/>
 
 export class TestComponent implements OnInit { <br/>
   public color="green"; <br/>
@@ -397,13 +424,14 @@ ngIf and ngSwitch conditionally render html elements. <br/>
 ngFor Directive renders list of HTML elements. <br/>
 
 Example: <br/>
-template: ` <br/>
- <div *ngFor="let colour of colours;index as i;"> <br/>
-    <h2>{{i}} {{colour}}</h2> <br/>
-  </div> <br/>
+template: `
+ <div *ngFor="let colour of colours;index as i;">
+    <h2>{{i}} {{colour}}</h2>
+  </div> 
 
 
-` <br/>
+` 
+<br/>
  export class TestComponent implements OnInit { <br/>
 
   public colours = ["red","blue","green","yellow"]; <br/>
