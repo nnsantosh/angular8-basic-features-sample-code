@@ -389,17 +389,17 @@ These are directives that let you add or remove HTML elements from the DOM. <br/
 ngIf, ngSwitch and ngFor <br/>
 
 
-ngIf Example: <br/>
+ngIf Example:
 template: `
   <h2 *ngIf=“true">
     Codevolution
   </h2>
   `,
-  <br/>
+<br/>
 
 If the above condition is changed to false the h2 element itself is removed from the DOM. <br/>
 
-ngSwitch Example: <br/>
+ngSwitch Example:
 template: `
  <div [ngSwitch]="color">
     <div [style.color]="'red'" *ngSwitchCase="'red'">You picked red color</div>
@@ -407,7 +407,7 @@ template: `
     <div [style.color]="'green'" *ngSwitchCase="'green'">You picked green color</div>
     <div *ngSwitchDefault>Pick color again</div>
   </div>
-  `, 
+  `
   <br/>
 
 export class TestComponent implements OnInit { <br/>
@@ -428,8 +428,6 @@ template: `
  <div *ngFor="let colour of colours;index as i;">
     <h2>{{i}} {{colour}}</h2>
   </div> 
-
-
 ` 
 <br/>
  export class TestComponent implements OnInit { <br/>
